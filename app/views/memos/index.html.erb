@@ -1,12 +1,3 @@
 <%= link_to 'メモを追加', new_memo_path, class: "btn btn-primary row col-8 offset-2 mb-3" %>
 
-<% if @memos.any? %>
-      <% @memos.each do |memo| %>
-        <div class="col-8 offset-2 bg-light pt-4 pb-4 rounded border mb-3">
-          <%= link_to memo.id, memo, class: "btn btn-secondary ms-2" %><span class="ms-2"><%= memo.content %></span>
-        </div>
-      <% end %>
-  <div class="pagination justify-content-center">
-    <%== pagy_bootstrap_nav(@pagy) %>
-  </div>
-<% end %>
+<%= render 'memos', memos: @memos %>

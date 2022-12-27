@@ -1,21 +1,21 @@
 class MemosController < ApplicationController
   before_action :require_user_logged_in
+  before_action :current_user_memo, only: [:show, :edit, :update, :destroy]
   
   def index
-    @pagy, @memos = pagy(Memo.all)
+    @pagy, @memos = pagy(current_user.memos.order(id: :desc))
   end
   
   def show
-    @memo = Memo.find(params[:id])
-    @pagy, @memos = pagy(Memo.all)
+    @pagy, @memos = pagy(current_user.memos.order(id: :desc))
   end
   
   def new
-    @memo = Memo.new
+    @memo = current_user.memos.build
   end
   
   def create
-    @memo = Memo.new(memo_params)
+    @memo = current_user.memos.build(memo_params)
     
     if @memo.save
       flash[:success] = 'メモが正常に追加されました'
@@ -27,12 +27,9 @@ class MemosController < ApplicationController
   end
   
   def edit
-    @memo =Memo.find(params[:id])
   end
   
   def update
-    @memo = Memo.find(params[:id])
-    
     if @memo.update(memo_params)
       flash[:success] = 'メモは正常に更新されました'
       redirect_to @memo
@@ -43,7 +40,6 @@ class MemosController < ApplicationController
   end
   
   def destroy
-    @memo = Memo.find(params[:id])
     @memo.destroy
     
     flash[:success] = 'メモは正常に削除されました'
@@ -54,5 +50,9 @@ class MemosController < ApplicationController
   
   def memo_params
     params.require(:memo).permit(:content)
+  end
+  
+  def current_user_memo
+    @memo = current_user.memos.find_by(params[:id])
   end
 end
