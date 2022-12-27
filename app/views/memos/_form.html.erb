@@ -1,0 +1,10 @@
+<%= form_with(model: memo) do |f| %>
+  <%= render 'layouts/error_messages', model: f.object %>
+  
+  <div class="mb-3">
+    <%= f.label :content, 'メモを入力' %>
+    <%= f.text_field :content, class: 'form-control' %>
+  </div>
+
+  <%= f.submit '追加', class: 'btn btn-primary' %>
+<% end %>
