@@ -1,15 +1,19 @@
-<div class="col-10 offset-1 bg-light p-4 rounded border mb-3">
-  <div class="row">
-    <div class="col-10">
-      <%= @memo.content %>
-    </div>
-    <div class="col-2">
-      <%= link_to '編集', edit_memo_path(@memo), class: 'btn btn-light' %>
-      <%= link_to '削除', @memo, method: :delete, data: { confirm: '本当に削除してよろしいですか？' }, class: 'btn btn-danger' %>
+<div class="col-10 offset-1 ">
+  <h1><span class="badge bg-secondary me-1"><%= @memo.id %></span>の詳細</h1>
+  
+  <%= link_to '一覧へ戻る', jump_memos, class: 'btn btn-link' %>
+  
+  <div class="bg-light p-4 rounded border mb-3">
+    <div class="row">
+      <div class="col-10">
+        <%= safe_join(@memo.content.split("\n"),tag(:br)) %>
+      </div>
+      <div class="col-2">
+        <%= link_to '編集', edit_memo_path(@memo), class: 'btn btn-dark' %>
+        <%= link_to '削除', @memo, method: :delete, data: { confirm: '本当に削除してよろしいですか？' }, class: 'btn btn-danger' %>
+      </div>
     </div>
   </div>
 </div>
 
-<%= link_to 'メモを追加', new_memo_path, class: "btn btn-primary row col-8 offset-2 mb-3" %>
-
-<%= render 'memos', memos: @memos %>
+<%= render 'memos', memos: @memos, id: params[:id] %>

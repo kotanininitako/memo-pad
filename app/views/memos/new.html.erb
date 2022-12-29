@@ -1,3 +1,4 @@
 <h1>メモを作成する</h1>
 
-<%= render 'form', memo: @memo %>
+<%= link_to '一覧へ戻る', "/memos/#{params[:parent_id]}", class: 'btn btn-link' %>
+<%= render 'form', memo: @memo, parent_id: params[:parent_id] %>

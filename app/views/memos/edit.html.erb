@@ -1,3 +1,4 @@
-<h1><%= @memo.id %>を編集する</h1>
+<h1><span class="badge bg-secondary me-1"><%= @memo.id %></span>を編集する</h1>
 
-<%= render 'form', memo: @memo %>
+<%= link_to '一覧へ戻る', @memo, class: 'btn btn-link' %>
+<%= render 'form', memo: @memo, parent_id: @memo.parent_id %>

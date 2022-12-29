@@ -1,10 +1,10 @@
 <%= form_with(model: memo) do |f| %>
   <%= render 'layouts/error_messages', model: f.object %>
+  <%= hidden_field_tag :parent_id, parent_id %>
   
   <div class="mb-3">
-    <%= f.label :content, 'メモを入力' %>
-    <%= f.text_field :content, class: 'form-control' %>
+    <%= f.text_area :content, class: 'form-control', rows: 10 %>
   </div>
 
-  <%= f.submit '追加', class: 'btn btn-primary' %>
+  <%= f.submit '投稿', class: 'btn btn-primary col-6 offset-3' %>
 <% end %>
