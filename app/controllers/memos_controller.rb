@@ -15,11 +15,11 @@ class MemosController < ApplicationController
   end
   
   def create
-    memo = current_user.memos.build(memo_params)
+    @memo = current_user.memos.build(memo_params)
     
-    if memo.save
+    if @memo.save
       flash[:success] = 'メモが正常に追加されました'
-      redirect_to memo_url(id: memo.id, parent_id: memo.parent_id)
+      redirect_to "/memos/#{params[:parent_id]}"#memo_url(id: memo.id, parent_id: memo.parent_id)
     else
       flash.now[:danger] = 'メモが追加されませんでした'
       render :new
