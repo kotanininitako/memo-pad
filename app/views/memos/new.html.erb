@@ -1,7 +1,7 @@
-<% if params[:parent_id] %>
-  <h1><span class="badge bg-secondary me-1"><%= params[:parent_id] %></span>の子メモを作成する</h1>
-<% else %>
+<% if params[:parent_id] == nil || params[:parent_id] == "" %>
   <h1>メモを作成する</h1>
+<% else %>
+  <h1><span class="badge bg-secondary me-1"><%= params[:parent_id] %></span>の子メモを作成する</h1>
 <% end %>
 
 <%= link_to '一覧へ戻る', "/memos/#{params[:parent_id]}", class: 'btn btn-link' %>
